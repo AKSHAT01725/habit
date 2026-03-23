@@ -366,9 +366,11 @@ button,select,input { font-family:inherit; }
   transform:translateX(0);
 }
 .page {
-  min-width:100%; width:100%; height:100%;
+  min-width:100%; width:100%;
+  min-height:100%; height:100%;
   overflow-y:auto; overflow-x:hidden;
   padding:18px;
+  padding-bottom:calc(18px + env(safe-area-inset-bottom));
   -webkit-overflow-scrolling:touch;
   flex-shrink:0; flex-grow:0;
   box-sizing:border-box;
@@ -438,8 +440,6 @@ button,select,input { font-family:inherit; }
       <div class="nav-item active" data-page="today"><span class="nav-icon">☀️</span>Today<span class="nav-badge" id="sNavBadge">0</span></div>
       <div class="nav-item" data-page="habits"><span class="nav-icon">◎</span>Habits</div>
       <div class="nav-item" data-page="tasks"><span class="nav-icon">✓</span>Tasks</div>
-      <div class="nav-item" data-page="categories"><span class="nav-icon">⊞</span>Categories</div>
-      <div class="nav-item" data-page="timer"><span class="nav-icon">⏱</span>Timer</div>
     </nav>
     <div class="sidebar-foot">
       <div class="streak-box">
@@ -465,8 +465,6 @@ button,select,input { font-family:inherit; }
         <div class="tb-tab active" data-page="today">Today</div>
         <div class="tb-tab" data-page="habits">Habits</div>
         <div class="tb-tab" data-page="tasks">Tasks</div>
-        <div class="tb-tab" data-page="timer">Focus Timer</div>
-        <div class="tb-tab" data-page="categories">Categories</div>
       </div>
     </div>
 
@@ -524,40 +522,11 @@ button,select,input { font-family:inherit; }
         <div class="task-list" id="tasksDone"></div>
       </div>
 
-      <!-- TIMER -->
-      <div class="page" id="page-timer">
-        <div class="timer-center">
-          <div class="timer-presets" id="timerPresets">
-            <div class="t-preset active" onclick="setPreset(25,'Focus',this)">Focus 25m</div>
-            <div class="t-preset" onclick="setPreset(10,'Short Break',this)">Break 10m</div>
-            <div class="t-preset" onclick="setPreset(5,'Mini Break',this)">Mini 5m</div>
-            <div class="t-preset" onclick="setPreset(50,'Deep Work',this)">Deep 50m</div>
-          </div>
-          <div class="timer-ring-area" style="width:220px;height:220px;margin:0 auto 24px">
-            <svg width="220" height="220" viewBox="0 0 220 220" style="position:relative;z-index:1">
-              <circle cx="110" cy="110" r="97" fill="none" stroke="var(--bg3)" stroke-width="8"/>
-              <circle id="timerArc" cx="110" cy="110" r="97" fill="none" stroke="var(--acc)" stroke-width="8"
-                stroke-linecap="round" stroke-dasharray="609" stroke-dashoffset="0"
-                transform="rotate(-90 110 110)" style="transition:stroke-dashoffset 1s linear"/>
-            </svg>
-            <div class="ring-bg">
-              <div class="timer-time" id="timerDisp">25:00</div>
-              <div class="timer-lbl" id="timerLbl">Focus</div>
-            </div>
-          </div>
-          <div class="timer-btns">
-            <div class="t-btn" onclick="resetTimer()" title="Reset">↺</div>
-            <div class="t-btn main" onclick="toggleTimer()" id="timerBtn">▶</div>
-            <div class="t-btn" onclick="skipTimer()" title="Skip">⏭</div>
-          </div>
-          <div id="timerHistory"></div>
-        </div>
-      </div>
+      <!-- TASKS -->
+      
 
       <!-- CATEGORIES -->
-      <div class="page" id="page-categories">
-        <div class="cats-grid" id="catsGrid"></div>
-      </div>
+      
 </div><!-- /pages-slider -->
     </div><!-- /pages -->
 
@@ -766,7 +735,7 @@ onAuthStateChanged(auth, user => {
 });
 
 // ─── PAGE ORDER (matches tab order) ───
-const PAGE_ORDER = ['today','habits','tasks','timer','categories'];
+const PAGE_ORDER = ['today','habits','tasks'];
 
 // ─── INIT APP ───
 function initApp() {
@@ -842,7 +811,6 @@ window.goPage = function(name) {
   if (name==='today') renderToday();
   if (name==='habits') renderHabits();
   if (name==='tasks') renderTasks();
-  if (name==='categories') renderCats();
 };
 
 // ─── TODAY ───
