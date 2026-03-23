@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Momentum</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 :root {
@@ -27,7 +27,7 @@
   --r:     12px;
   --rl:    16px;
 }
-html,body { height:100%; background:var(--bg); color:var(--txt); font-family:'Syne',sans-serif; overflow:hidden; }
+html,body { height:100%; background:var(--bg); color:var(--txt); font-family:'Poppins',sans-serif; overflow:hidden; }
 button,select,input { font-family:inherit; }
 ::-webkit-scrollbar { width:3px; }
 ::-webkit-scrollbar-track { background:transparent; }
@@ -47,7 +47,7 @@ button,select,input { font-family:inherit; }
   text-align:center;
 }
 .auth-logo { font-size:44px; margin-bottom:8px; }
-.auth-title { font-family:'Syne',sans-serif; font-size:28px; font-weight:800; letter-spacing:-1px; margin-bottom:6px; }
+.auth-title { font-family:'Poppins',sans-serif; font-size:28px; font-weight:800; letter-spacing:-1px; margin-bottom:6px; }
 .auth-sub { font-size:13px; color:var(--txt2); margin-bottom:32px; line-height:1.5; }
 .auth-google-btn {
   width:100%; height:50px; border:1px solid var(--bdr2);
@@ -92,7 +92,7 @@ button,select,input { font-family:inherit; }
   background:var(--acc); display:flex; align-items:center; justify-content:center;
   font-size:17px; box-shadow:0 4px 14px rgba(232,58,106,0.35);
 }
-.logo-name { font-family:'Syne',sans-serif; font-size:18px; font-weight:800; letter-spacing:-0.5px; }
+.logo-name { font-family:'Poppins',sans-serif; font-size:18px; font-weight:800; letter-spacing:-0.5px; }
 .logo-sub { font-size:10px; color:var(--txt3); margin-top:2px; }
 .logo-user { font-size:11px; color:var(--txt2); margin-top:8px; display:flex; align-items:center; gap:6px; }
 .logo-user img { width:22px; height:22px; border-radius:50%; }
@@ -113,7 +113,7 @@ button,select,input { font-family:inherit; }
 .sidebar-foot { padding:14px; border-top:1px solid var(--bdr); }
 .streak-box { background:var(--bg3); border:1px solid var(--bdr); border-radius:var(--r); padding:12px 14px; display:flex; align-items:center; gap:10px; }
 .streak-fire { font-size:22px; }
-.streak-num { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--amb); line-height:1; }
+.streak-num { font-family:'Poppins',sans-serif; font-size:22px; font-weight:800; color:var(--amb); line-height:1; }
 .streak-lbl { font-size:11px; color:var(--txt2); margin-top:1px; }
 .sign-out-btn { width:100%; margin-top:10px; height:34px; background:transparent; border:1px solid var(--bdr); border-radius:9px; color:var(--txt3); font-size:12px; font-weight:600; cursor:pointer; transition:all 0.15s; }
 .sign-out-btn:hover { border-color:var(--acc); color:var(--acc); }
@@ -128,7 +128,7 @@ button,select,input { font-family:inherit; }
   border-bottom:1px solid var(--bdr); z-index:10;
 }
 .tb-left { display:flex; flex-direction:column; gap:1px; min-width:0; }
-.tb-title { font-family:'Syne',sans-serif; font-size:17px; font-weight:800; letter-spacing:-0.3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tb-title { font-family:'Poppins',sans-serif; font-size:17px; font-weight:800; letter-spacing:-0.3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .tb-sub { font-size:10.5px; color:var(--txt3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .tb-right { display:flex; gap:8px; flex-shrink:0; }
 .tb-btn {
@@ -143,9 +143,7 @@ button,select,input { font-family:inherit; }
 
 /* ─── PAGES ─── */
 .pages { flex:1; overflow:hidden; position:relative; }
-.page { position:absolute; inset:0; overflow-y:auto; overflow-x:hidden; padding:18px; display:none; -webkit-overflow-scrolling:touch; }
-.page.active { display:block; animation:pagein 0.2s ease; }
-@keyframes pagein { from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:translateY(0);} }
+/* page display handled by .pages-slider flex layout */
 
 /* ─── KPI ROW ─── */
 .kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:18px; }
@@ -156,7 +154,7 @@ button,select,input { font-family:inherit; }
 .kpi-card.green::after { background:var(--grn); }
 .kpi-card.violet::after{ background:var(--vlt); }
 .kpi-icon { font-size:18px; margin-bottom:6px; }
-.kpi-val { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; line-height:1; letter-spacing:-0.5px; }
+.kpi-val { font-family:'Poppins',sans-serif; font-size:24px; font-weight:800; line-height:1; letter-spacing:-0.5px; }
 .kpi-val.rose   { color:var(--acc); }
 .kpi-val.amber  { color:var(--amb); }
 .kpi-val.green  { color:var(--grn); }
@@ -218,7 +216,7 @@ button,select,input { font-family:inherit; }
 .hc-prog-fill { height:100%; border-radius:2px; transition:width 0.6s; }
 .hc-foot { display:flex; justify-content:space-between; align-items:center; }
 .hc-stats { display:flex; gap:12px; }
-.hc-stat-val { font-family:'Syne',sans-serif; font-size:16px; font-weight:800; }
+.hc-stat-val { font-family:'Poppins',sans-serif; font-size:16px; font-weight:800; }
 .hc-stat-lbl { font-size:9px; color:var(--txt3); text-transform:uppercase; letter-spacing:0.3px; }
 .icon-btn { width:30px; height:30px; border-radius:8px; background:var(--bg3); border:1px solid var(--bdr); display:flex; align-items:center; justify-content:center; font-size:13px; cursor:pointer; transition:all 0.12s; color:var(--txt2); }
 .icon-btn:hover { background:var(--bg4); color:var(--txt); }
@@ -263,7 +261,7 @@ button,select,input { font-family:inherit; }
 .t-preset.active { background:var(--acc2); border-color:rgba(232,58,106,0.3); color:var(--acc); }
 .timer-ring-area { display:flex; justify-content:center; margin-bottom:24px; position:relative; }
 .ring-bg { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:4px; }
-.timer-time { font-family:'Syne',sans-serif; font-size:48px; font-weight:800; letter-spacing:-3px; }
+.timer-time { font-family:'Poppins',sans-serif; font-size:48px; font-weight:800; letter-spacing:-3px; }
 .timer-lbl { font-size:11px; color:var(--txt2); text-transform:uppercase; letter-spacing:1px; font-weight:600; }
 .timer-btns { display:flex; gap:10px; justify-content:center; margin-bottom:24px; }
 .t-btn { width:50px; height:50px; border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:18px; cursor:pointer; transition:all 0.15s; border:1px solid var(--bdr); background:var(--bg2); color:var(--txt2); }
@@ -273,7 +271,7 @@ button,select,input { font-family:inherit; }
 .t-btn:active { transform:scale(0.92); }
 .t-sess { display:flex; justify-content:space-between; align-items:center; padding:10px 13px; background:var(--bg3); border-radius:9px; margin-bottom:5px; font-size:12px; }
 .t-sess-name { font-weight:600; }
-.t-sess-dur { color:var(--acc); font-weight:700; font-family:'Syne',sans-serif; font-size:13px; }
+.t-sess-dur { color:var(--acc); font-weight:700; font-family:'Poppins',sans-serif; font-size:13px; }
 
 /* ─── DRAWER ─── */
 .drawer-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.55); backdrop-filter:blur(4px); z-index:100; display:none; align-items:stretch; justify-content:flex-end; }
@@ -281,7 +279,7 @@ button,select,input { font-family:inherit; }
 .drawer { width:min(460px,100vw); background:var(--bg1); border-left:1px solid var(--bdr); display:flex; flex-direction:column; animation:drawerIn 0.25s ease; }
 @keyframes drawerIn { from{transform:translateX(100%);} to{transform:translateX(0);} }
 .drawer-head { padding:16px 18px; border-bottom:1px solid var(--bdr); display:flex; align-items:center; justify-content:space-between; }
-.drawer-title { font-family:'Syne',sans-serif; font-size:16px; font-weight:800; }
+.drawer-title { font-family:'Poppins',sans-serif; font-size:16px; font-weight:800; }
 .drawer-close { width:28px; height:28px; border-radius:8px; background:var(--bg3); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:13px; color:var(--txt2); }
 .drawer-close:hover { background:var(--bg4); color:var(--txt); }
 .drawer-tabs { display:flex; padding:0 18px; border-bottom:1px solid var(--bdr); overflow-x:auto; }
@@ -292,7 +290,7 @@ button,select,input { font-family:inherit; }
 .dr-info { background:var(--bg2); border:1px solid var(--bdr); border-radius:var(--r); padding:13px 15px; display:flex; align-items:center; gap:10px; margin-bottom:8px; }
 .dr-info-icon { font-size:18px; }
 .dr-info-lbl { font-size:9.5px; color:var(--txt3); text-transform:uppercase; letter-spacing:1px; font-weight:700; margin-bottom:2px; }
-.dr-info-val { font-family:'Syne',sans-serif; font-size:19px; font-weight:800; }
+.dr-info-val { font-family:'Poppins',sans-serif; font-size:19px; font-weight:800; }
 
 /* ─── MODAL ─── */
 .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.65); backdrop-filter:blur(6px); z-index:200; display:none; align-items:flex-end; justify-content:center; padding:0; }
@@ -301,7 +299,7 @@ button,select,input { font-family:inherit; }
 @keyframes modalUp { from{opacity:0;transform:translateY(40px);} to{opacity:1;transform:translateY(0);} }
 .modal-handle { width:40px; height:4px; background:var(--bg4); border-radius:2px; margin:0 auto 20px; }
 .modal-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
-.modal-title { font-family:'Syne',sans-serif; font-size:18px; font-weight:800; }
+.modal-title { font-family:'Poppins',sans-serif; font-size:18px; font-weight:800; }
 .fl { margin-bottom:14px; }
 .fl label { display:block; font-size:10px; font-weight:700; color:var(--txt3); text-transform:uppercase; letter-spacing:1px; margin-bottom:5px; }
 .fl input,.fl select { width:100%; height:40px; padding:0 12px; background:var(--bg2); border:1.5px solid var(--bdr); border-radius:9px; color:var(--txt); font-size:13px; outline:none; transition:border-color 0.15s; }
@@ -315,7 +313,7 @@ button,select,input { font-family:inherit; }
 .color-row { display:flex; gap:8px; flex-wrap:wrap; }
 .co-swatch { width:26px; height:26px; border-radius:50%; cursor:pointer; border:2px solid transparent; transition:all 0.15s; }
 .co-swatch.sel { border-color:#fff; transform:scale(1.2); }
-.m-btn { width:100%; height:42px; border:none; border-radius:10px; background:var(--acc); color:#fff; font-size:14px; font-weight:700; cursor:pointer; margin-top:4px; font-family:'Syne',sans-serif; box-shadow:0 3px 14px rgba(232,58,106,0.3); transition:all 0.15s; }
+.m-btn { width:100%; height:42px; border:none; border-radius:10px; background:var(--acc); color:#fff; font-size:14px; font-weight:700; cursor:pointer; margin-top:4px; font-family:'Poppins',sans-serif; box-shadow:0 3px 14px rgba(232,58,106,0.3); transition:all 0.15s; }
 .m-btn:hover { background:#ff4d7a; }
 .m-btn.ghost { background:transparent; border:1px solid var(--acc); color:var(--acc); box-shadow:none; margin-top:8px; }
 .m-btn.ghost:hover { background:var(--acc2); }
@@ -332,62 +330,76 @@ button,select,input { font-family:inherit; }
 .empty-em { font-size:42px; margin-bottom:10px; opacity:0.35; }
 .empty-title { font-size:14px; font-weight:700; color:var(--txt2); margin-bottom:4px; }
 
-/* ─── MOBILE TOPBAR ─── */
-.mob-topbar {
-  display:none; flex-shrink:0; flex-direction:column;
-  background:var(--bg1); border-bottom:1px solid var(--bdr); z-index:10;
+/* ─── TOPBAR (unified) ─── */
+.topbar {
+  flex-shrink:0; background:var(--bg1);
+  border-bottom:1px solid var(--bdr); z-index:20;
 }
-.mob-topbar-row1 {
+.topbar-row1 {
   display:flex; align-items:center; justify-content:space-between;
-  padding:16px 16px 8px;
+  padding:16px 20px 10px;
 }
-.mob-brand { display:flex; flex-direction:column; }
-.mob-brand-name { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; letter-spacing:-0.8px; color:var(--txt); line-height:1.1; }
-.mob-brand-date { font-size:11px; color:var(--txt3); margin-top:3px; }
-.mob-add-btn {
-  width:42px; height:42px; border-radius:13px;
+.tb-brand { display:flex; flex-direction:column; }
+.tb-appname { font-family:'Poppins',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.4px; color:var(--txt); line-height:1.1; }
+.tb-date { font-size:11px; color:var(--txt3); margin-top:2px; font-weight:400; }
+.tb-add-btn {
+  height:38px; padding:0 16px; border-radius:10px;
   background:var(--acc); color:#fff; border:none;
-  display:flex; align-items:center; justify-content:center;
-  font-size:26px; font-weight:300; cursor:pointer;
-  box-shadow:0 3px 14px rgba(232,58,106,0.4);
-  transition:transform 0.15s; line-height:1;
+  font-family:'Poppins',sans-serif; font-size:13px; font-weight:600;
+  cursor:pointer; box-shadow:0 2px 10px rgba(232,58,106,0.35);
+  transition:all 0.15s; white-space:nowrap;
 }
-.mob-add-btn:active { transform:scale(0.9); }
-
-
-/* ─── MOBILE BOTTOM NAV ─── */
-.mob-nav { display:none; }
+.tb-add-btn:hover { background:#ff4d7a; }
+.tb-add-btn:active { transform:scale(0.96); }
+.topbar-tabs {
+  display:flex; overflow-x:auto; padding:0 16px;
+  scrollbar-width:none; -ms-overflow-style:none; gap:0;
+}
+.topbar-tabs::-webkit-scrollbar { display:none; }
+.tb-tab {
+  flex-shrink:0; padding:9px 16px 10px;
+  font-family:'Poppins',sans-serif; font-size:13px; font-weight:600;
+  color:var(--txt3); cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:all 0.15s; white-space:nowrap;
+}
+.tb-tab:hover { color:var(--txt2); }
+.tb-tab.active { color:var(--acc); border-bottom-color:var(--acc); }
 
 /* ─── SYNC INDICATOR ─── */
-.sync-dot { width:7px; height:7px; border-radius:50%; background:var(--grn); display:inline-block; margin-left:6px; }
+.sync-dot { width:7px; height:7px; border-radius:50%; background:var(--grn); display:inline-block; margin-left:6px; vertical-align:middle; }
 .sync-dot.syncing { background:var(--amb); animation:pulse 1s infinite; }
 @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+/* ─── PAGES SLIDER (swipeable) ─── */
+.pages { flex:1; overflow:hidden; position:relative; }
+.pages-slider {
+  display:flex; height:100%;
+  transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
+  will-change:transform;
+  transform:translateX(0);
+}
+.page {
+  min-width:100%; height:100%;
+  overflow-y:auto; overflow-x:hidden;
+  padding:18px; -webkit-overflow-scrolling:touch;
+  flex-shrink:0;
+  /* No display:none - all pages always rendered in flex row */
+}
+.page.active { /* kept for JS compat but not used for display */ }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 768px) {
   .sidebar { display:none; }
-  .topbar { display:none; }
-  .mob-topbar { display:flex; }
-  .mob-nav {
-    display:flex; flex-direction:row;
-    flex-shrink:0; height:66px;
-    background:var(--bg1); border-top:1px solid var(--bdr);
-    padding-bottom:env(safe-area-inset-bottom);
-  }
-  .mob-tab {
-    flex:1; display:flex; flex-direction:column; align-items:center;
-    justify-content:center; gap:4px; cursor:pointer;
-    color:var(--txt3); font-size:10px; font-weight:600;
-    transition:all 0.15s; padding:6px 2px;
-    border-top:2px solid transparent;
-  }
-  .mob-tab.active { color:var(--acc); border-top-color:var(--acc); background:rgba(232,58,106,0.04); }
-  .mob-tab-icon { font-size:22px; line-height:1; }
+  .topbar-row1 { padding:14px 14px 8px; }
+  .tb-appname { font-size:18px; }
+  .tb-tab { font-size:12px; padding:8px 13px 9px; }
+  .topbar-tabs { padding:0 10px; }
   .today-layout { grid-template-columns:1fr; }
   .side-panel { display:none; }
   .kpi-row { grid-template-columns:repeat(2,1fr); }
-  .page { padding:14px; }
-  .toast-wrap { bottom:80px; }
+  .page { padding:12px; }
+  .toast-wrap { bottom:16px; }
   .modal-overlay { align-items:flex-end; }
 }
 
@@ -453,31 +465,27 @@ button,select,input { font-family:inherit; }
 
   <!-- MAIN -->
   <div class="main">
-    <!-- DESKTOP TOPBAR -->
-    <div class="topbar">
-      <div class="tb-left">
-        <div class="tb-title" id="tbTitle">Today <span class="sync-dot" id="syncDot" style="display:none"></span></div>
-        <div class="tb-sub" id="tbSub"></div>
-      </div>
-      <div class="tb-right">
-        <button class="tb-btn" onclick="openModal()">＋ Add</button>
-        <button class="tb-btn primary" onclick="openModal()">＋ New Habit</button>
-      </div>
-    </div>
-
-    <!-- MOBILE TOPBAR -->
-    <div class="mob-topbar" id="mobTopbar">
-      <div class="mob-topbar-row1">
-        <div class="mob-brand">
-          <div class="mob-brand-name">Momentum</div>
-          <div class="mob-brand-date" id="mobDate"></div>
+    <!-- TOPBAR (desktop + mobile) -->
+    <div class="topbar" id="mainTopbar">
+      <div class="topbar-row1">
+        <div class="tb-brand">
+          <div class="tb-appname">Momentum <span class="sync-dot" id="syncDot" style="display:none"></span></div>
+          <div class="tb-date" id="tbDate"></div>
         </div>
-        <button class="mob-add-btn" onclick="openModal()">＋</button>
+        <button class="tb-add-btn" onclick="openModal()">＋ New Habit</button>
       </div>
-
+      <div class="topbar-tabs" id="topbarTabs">
+        <div class="tb-tab active" data-page="today">Today</div>
+        <div class="tb-tab" data-page="habits">Habits</div>
+        <div class="tb-tab" data-page="tasks">Tasks</div>
+        <div class="tb-tab" data-page="timer">Focus Timer</div>
+        <div class="tb-tab" data-page="categories">Categories</div>
+      </div>
     </div>
 
-    <div class="pages">
+    <div class="pages" id="pagesWrap">
+      <div class="pages-slider" id="pagesSlider">
+
       <!-- TODAY -->
       <div class="page active" id="page-today">
         <div class="kpi-row" id="kpiRow"></div>
@@ -529,11 +537,6 @@ button,select,input { font-family:inherit; }
         <div class="task-list" id="tasksDone"></div>
       </div>
 
-      <!-- CATEGORIES -->
-      <div class="page" id="page-categories">
-        <div class="cats-grid" id="catsGrid"></div>
-      </div>
-
       <!-- TIMER -->
       <div class="page" id="page-timer">
         <div class="timer-center">
@@ -563,16 +566,15 @@ button,select,input { font-family:inherit; }
           <div id="timerHistory"></div>
         </div>
       </div>
-    </div>
 
-    <!-- MOBILE BOTTOM NAV -->
-    <div class="mob-nav" id="mobNav">
-      <div class="mob-tab active" data-page="today"><span class="mob-tab-icon">☀️</span>Today</div>
-      <div class="mob-tab" data-page="habits"><span class="mob-tab-icon">◎</span>Habits</div>
-      <div class="mob-tab" data-page="tasks"><span class="mob-tab-icon">✓</span>Tasks</div>
-      <div class="mob-tab" data-page="timer"><span class="mob-tab-icon">⏱</span>Timer</div>
-      <div class="mob-tab" data-page="categories"><span class="mob-tab-icon">⊞</span>More</div>
-    </div>
+      <!-- CATEGORIES -->
+      <div class="page" id="page-categories">
+        <div class="cats-grid" id="catsGrid"></div>
+      </div>
+</div><!-- /pages-slider -->
+    </div><!-- /pages -->
+
+
   </div>
 </div>
 
@@ -776,30 +778,80 @@ onAuthStateChanged(auth, user => {
   }
 });
 
+// ─── PAGE ORDER (matches tab order) ───
+const PAGE_ORDER = ['today','habits','tasks','timer','categories'];
+
 // ─── INIT APP ───
 function initApp() {
-  document.querySelectorAll('.nav-item,.mob-tab').forEach(el => {
+  document.querySelectorAll('.nav-item,.tb-tab').forEach(el => {
     el.addEventListener('click', () => { const pg = el.dataset.page; if (pg) goPage(pg); });
   });
+
   const dateStr = NOW.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
-  document.getElementById('tbSub').textContent = dateStr;
-  const mobDate = document.getElementById('mobDate');
-  if (mobDate) mobDate.textContent = dateStr;
+  const tbDate = document.getElementById('tbDate');
+  if (tbDate) tbDate.textContent = dateStr;
+
+  // Init swipe
+  initSwipe();
   renderToday();
   updateSidebar();
 }
 
+// ─── SWIPE SUPPORT ───
+function initSwipe() {
+  const slider = document.getElementById('pagesSlider');
+  if (!slider) return;
+  let startX = 0, startY = 0, isDragging = false, isSwipe = false;
+
+  slider.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    isDragging = true; isSwipe = false;
+    slider.style.transition = 'none';
+  }, {passive:true});
+
+  slider.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const dx = e.touches[0].clientX - startX;
+    const dy = e.touches[0].clientY - startY;
+    if (!isSwipe && Math.abs(dy) > Math.abs(dx)) { isDragging = false; return; }
+    isSwipe = true;
+    const idx = PAGE_ORDER.indexOf(curPage);
+    const base = -idx * 100;
+    const offset = (dx / window.innerWidth) * 100;
+    slider.style.transform = `translateX(calc(${base}% + ${dx}px))`;
+  }, {passive:true});
+
+  slider.addEventListener('touchend', e => {
+    if (!isDragging || !isSwipe) return;
+    isDragging = false;
+    slider.style.transition = '';
+    const dx = e.changedTouches[0].clientX - startX;
+    const threshold = window.innerWidth * 0.25;
+    const idx = PAGE_ORDER.indexOf(curPage);
+    if (dx < -threshold && idx < PAGE_ORDER.length-1) goPage(PAGE_ORDER[idx+1]);
+    else if (dx > threshold && idx > 0) goPage(PAGE_ORDER[idx-1]);
+    else goPage(curPage); // snap back
+  }, {passive:true});
+}
+
 // ─── NAVIGATION ───
 window.goPage = function(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item,.mob-tab').forEach(n => n.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-  document.querySelectorAll('[data-page="'+name+'"]').forEach(n => n.classList.add('active'));
   curPage = name;
-  const titles = {today:'Today',habits:'Habits',tasks:'Tasks',categories:'Categories',timer:'Focus Timer'};
-  document.getElementById('tbTitle').innerHTML = (titles[name]||name) + ' <span class="sync-dot" id="syncDot" style="display:none"></span>';
-  const subs = { today:NOW.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}), habits:H.length+' active habits', tasks:T.filter(t=>!t.done).length+' tasks pending', categories:'', timer:'' };
-  document.getElementById('tbSub').textContent = subs[name]||'';
+  // Slide to page
+  const slider = document.getElementById('pagesSlider');
+  const idx = PAGE_ORDER.indexOf(name);
+  if (slider && idx >= 0) {
+    slider.style.transition = 'transform 0.32s cubic-bezier(0.4,0,0.2,1)';
+    slider.style.transform = `translateX(-${idx * 100}%)`;
+  }
+  // Update tabs
+  document.querySelectorAll('.nav-item,.tb-tab').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('[data-page="'+name+'"]').forEach(n => n.classList.add('active'));
+  // Scroll active tab into view
+  const activeTab = document.querySelector('.tb-tab.active');
+  if (activeTab) activeTab.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  // Render page content
   if (name==='today') renderToday();
   if (name==='habits') renderHabits();
   if (name==='tasks') renderTasks();
@@ -989,7 +1041,6 @@ window.delHabit = async function(id) {
 
 // ─── TASKS ───
 function renderTasks() {
-  document.getElementById('tbSub').textContent = T.filter(t=>!t.done).length+' tasks pending';
   const row = t => `<div class="task-row ${t.done?'done':''}" id="tr-${t.id}">
     <div class="task-cb" onclick="toggleTask('${t.id}')">${t.done?'✓':''}</div>
     <div class="task-name">${t.name}</div>
@@ -1110,7 +1161,7 @@ function buildDrCal(h) {
     cells+=`<div class="mc-cell ${cls}" style="font-size:11px;cursor:pointer;" onclick="toggleDrDay('${h.id}','${dateStr}')">${day}</div>`;
   }
   return `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-    <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800">${mn} ${dCalY}</div>
+    <div style="font-family:'Poppins',sans-serif;font-size:17px;font-weight:800">${mn} ${dCalY}</div>
     <div style="display:flex;gap:7px">
       <div class="icon-btn" onclick="dCalM--;if(dCalM<0){dCalM=11;dCalY--;}renderDrawer()" style="font-size:15px">‹</div>
       <div class="icon-btn" onclick="dCalM++;if(dCalM>11){dCalM=0;dCalY++;}renderDrawer()" style="font-size:15px">›</div>
@@ -1143,7 +1194,7 @@ function buildDrStats(h) {
     <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r);padding:13px">
       <div style="font-size:18px;margin-bottom:6px">${ic}</div>
       <div style="font-size:9.5px;color:var(--txt3);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:2px">${l}</div>
-      <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;${c?'color:'+c:''}">${v}</div>
+      <div style="font-family:'Poppins',sans-serif;font-size:20px;font-weight:800;${c?'color:'+c:''}">${v}</div>
     </div>`).join('')}
   </div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r);padding:14px;margin-bottom:12px">
