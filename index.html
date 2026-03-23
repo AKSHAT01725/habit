@@ -379,25 +379,35 @@ button,select,input { font-family:inherit; }
 @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 
 /* ─── PAGES SLIDER (swipeable) ─── */
-.pages { flex:1; overflow:hidden; min-height:0; position:relative; }
+.pages {
+  flex:1;
+  min-height:0;
+  position:relative;
+  overflow:hidden;
+}
 .pages-slider {
   display:flex;
-  width:100%; height:100%;
+  width:100%;
+  height:100%;
   transition:transform 0.32s cubic-bezier(0.4,0,0.2,1) !important;
   will-change:transform;
   transform:translateX(0);
 }
 .page {
-  min-width:100%; width:100%;
+  /* width, never height — the page scrolls inside its own 100% height slot */
+  min-width:100%;
+  width:100%;
   height:100%;
-  overflow-y:scroll;
+  overflow-y:auto;
   overflow-x:hidden;
-  padding:20px 18px 80px 18px;
   -webkit-overflow-scrolling:touch;
-  flex-shrink:0; flex-grow:0;
+  flex-shrink:0;
+  flex-grow:0;
   box-sizing:border-box;
-  /* Force browser to respect scroll height */
-  position:relative;
+}
+.page-inner {
+  padding:20px 18px 120px 18px;
+  box-sizing:border-box;
 }
 
 /* ─── RESPONSIVE ─── */
@@ -411,7 +421,7 @@ button,select,input { font-family:inherit; }
   .today-layout { grid-template-columns:1fr; }
   .side-panel { display:none; }
   .kpi-row { grid-template-columns:repeat(2,1fr); }
-  .page { padding:14px 14px 80px 14px; }
+  .page-inner { padding:14px 14px 120px 14px; }
   .toast-wrap { bottom:16px; }
   .modal-overlay { align-items:flex-end; }
 }
@@ -592,7 +602,8 @@ button,select,input { font-family:inherit; }
 
       <!-- TODAY -->
       <div class="page active" id="page-today">
-        <div class="today-layout">
+        
+        <div class="page-inner"><div class="today-layout">
           <div>
             <div class="sec-lbl">Habits — Last 7 Days</div>
             <div id="dateColGrid"></div>
@@ -616,15 +627,20 @@ button,select,input { font-family:inherit; }
             </div>
           </div>
         </div>
+        </div>
       </div>
 
       <!-- HABITS -->
       <div class="page" id="page-habits">
-        <div class="habits-grid" id="habitsGrid"></div>
+        
+        <div class="page-inner"><div class="habits-grid" id="habitsGrid"></div>
+        </div>
       </div>
       <!-- STATISTICS -->
       <div class="page" id="page-stats">
-        <div id="statsContent"></div>
+        
+        <div class="page-inner"><div id="statsContent"></div>
+        </div>
       </div>
 
 
@@ -633,7 +649,8 @@ button,select,input { font-family:inherit; }
 
       <!-- SETTINGS -->
       <div class="page" id="page-settings">
-        <div class="settings-wrap">
+        
+        <div class="page-inner"><div class="settings-wrap">
 
           <!-- Account -->
           <div class="sett-section">
@@ -695,6 +712,7 @@ button,select,input { font-family:inherit; }
             </div>
           </div>
 
+        </div>
         </div>
       </div>
 
