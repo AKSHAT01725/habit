@@ -332,7 +332,41 @@ button,select,input { font-family:inherit; }
 .empty-em { font-size:42px; margin-bottom:10px; opacity:0.35; }
 .empty-title { font-size:14px; font-weight:700; color:var(--txt2); margin-bottom:4px; }
 
-/* ─── MOBILE NAV ─── */
+/* ─── MOBILE TOPBAR ─── */
+.mob-topbar {
+  display:none; flex-shrink:0; flex-direction:column;
+  background:var(--bg1); border-bottom:1px solid var(--bdr); z-index:10;
+}
+.mob-topbar-row1 {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 16px 8px;
+}
+.mob-brand { display:flex; flex-direction:column; }
+.mob-brand-name { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; letter-spacing:-0.8px; color:var(--txt); line-height:1.1; }
+.mob-brand-date { font-size:11px; color:var(--txt3); margin-top:3px; }
+.mob-add-btn {
+  width:42px; height:42px; border-radius:13px;
+  background:var(--acc); color:#fff; border:none;
+  display:flex; align-items:center; justify-content:center;
+  font-size:26px; font-weight:300; cursor:pointer;
+  box-shadow:0 3px 14px rgba(232,58,106,0.4);
+  transition:transform 0.15s; line-height:1;
+}
+.mob-add-btn:active { transform:scale(0.9); }
+.mob-page-tabs {
+  display:flex; overflow-x:auto; padding:0 14px 0;
+  scrollbar-width:none; -ms-overflow-style:none; gap:0;
+}
+.mob-page-tabs::-webkit-scrollbar { display:none; }
+.mob-page-tab {
+  flex-shrink:0; padding:8px 14px 10px;
+  font-size:13px; font-weight:600; color:var(--txt3);
+  cursor:pointer; border-bottom:2px solid transparent;
+  transition:all 0.15s; white-space:nowrap;
+}
+.mob-page-tab.active { color:var(--acc); border-bottom-color:var(--acc); }
+
+/* ─── MOBILE BOTTOM NAV ─── */
 .mob-nav { display:none; }
 
 /* ─── SYNC INDICATOR ─── */
@@ -343,22 +377,28 @@ button,select,input { font-family:inherit; }
 /* ─── RESPONSIVE ─── */
 @media (max-width: 768px) {
   .sidebar { display:none; }
+  .topbar { display:none; }
+  .mob-topbar { display:flex; }
   .mob-nav {
-    display:flex; flex-direction:row; height:62px; flex-shrink:0;
+    display:flex; flex-direction:row;
+    flex-shrink:0; height:66px;
     background:var(--bg1); border-top:1px solid var(--bdr);
     padding-bottom:env(safe-area-inset-bottom);
   }
-  .mob-tab { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; cursor:pointer; color:var(--txt3); font-size:9px; font-weight:600; transition:all 0.15s; padding:8px 4px; }
-  .mob-tab.active { color:var(--acc); }
-  .mob-tab-icon { font-size:20px; }
-  .mob-fab { width:50px; flex:none; align-self:center; height:50px; background:var(--acc); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:24px; color:#fff; cursor:pointer; box-shadow:0 3px 14px rgba(232,58,106,0.45); margin:0 6px; flex-shrink:0; }
+  .mob-tab {
+    flex:1; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:4px; cursor:pointer;
+    color:var(--txt3); font-size:10px; font-weight:600;
+    transition:all 0.15s; padding:6px 2px;
+    border-top:2px solid transparent;
+  }
+  .mob-tab.active { color:var(--acc); border-top-color:var(--acc); background:rgba(232,58,106,0.04); }
+  .mob-tab-icon { font-size:22px; line-height:1; }
   .today-layout { grid-template-columns:1fr; }
   .side-panel { display:none; }
   .kpi-row { grid-template-columns:repeat(2,1fr); }
   .page { padding:14px; }
-  .topbar { padding:0 14px; }
-  .tb-btn:not(.primary) { display:none; }
-  .toast-wrap { bottom:74px; }
+  .toast-wrap { bottom:80px; }
   .modal-overlay { align-items:flex-end; }
 }
 
@@ -424,6 +464,7 @@ button,select,input { font-family:inherit; }
 
   <!-- MAIN -->
   <div class="main">
+    <!-- DESKTOP TOPBAR -->
     <div class="topbar">
       <div class="tb-left">
         <div class="tb-title" id="tbTitle">Today <span class="sync-dot" id="syncDot" style="display:none"></span></div>
@@ -432,6 +473,24 @@ button,select,input { font-family:inherit; }
       <div class="tb-right">
         <button class="tb-btn" onclick="openModal()">＋ Add</button>
         <button class="tb-btn primary" onclick="openModal()">＋ New Habit</button>
+      </div>
+    </div>
+
+    <!-- MOBILE TOPBAR -->
+    <div class="mob-topbar" id="mobTopbar">
+      <div class="mob-topbar-row1">
+        <div class="mob-brand">
+          <div class="mob-brand-name">Momentum</div>
+          <div class="mob-brand-date" id="mobDate"></div>
+        </div>
+        <button class="mob-add-btn" onclick="openModal()">＋</button>
+      </div>
+      <div class="mob-page-tabs" id="mobPageTabs">
+        <div class="mob-page-tab active" data-page="today">Today</div>
+        <div class="mob-page-tab" data-page="tasks">Tasks</div>
+        <div class="mob-page-tab" data-page="habits">Habits</div>
+        <div class="mob-page-tab" data-page="timer">Focus Timer</div>
+        <div class="mob-page-tab" data-page="categories">Categories</div>
       </div>
     </div>
 
@@ -523,11 +582,10 @@ button,select,input { font-family:inherit; }
       </div>
     </div>
 
-    <!-- MOBILE NAV -->
-    <div class="mob-nav">
+    <!-- MOBILE BOTTOM NAV -->
+    <div class="mob-nav" id="mobNav">
       <div class="mob-tab active" data-page="today"><span class="mob-tab-icon">☀️</span>Today</div>
       <div class="mob-tab" data-page="habits"><span class="mob-tab-icon">◎</span>Habits</div>
-      <div class="mob-fab" onclick="openModal()">＋</div>
       <div class="mob-tab" data-page="tasks"><span class="mob-tab-icon">✓</span>Tasks</div>
       <div class="mob-tab" data-page="timer"><span class="mob-tab-icon">⏱</span>Timer</div>
     </div>
@@ -736,10 +794,13 @@ onAuthStateChanged(auth, user => {
 
 // ─── INIT APP ───
 function initApp() {
-  document.querySelectorAll('.nav-item,.mob-tab').forEach(el => {
+  document.querySelectorAll('.nav-item,.mob-tab,.mob-page-tab').forEach(el => {
     el.addEventListener('click', () => { const pg = el.dataset.page; if (pg) goPage(pg); });
   });
-  document.getElementById('tbSub').textContent = NOW.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  const dateStr = NOW.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  document.getElementById('tbSub').textContent = dateStr;
+  const mobDate = document.getElementById('mobDate');
+  if (mobDate) mobDate.textContent = dateStr;
   renderToday();
   updateSidebar();
 }
@@ -747,7 +808,7 @@ function initApp() {
 // ─── NAVIGATION ───
 window.goPage = function(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item,.mob-tab').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.nav-item,.mob-tab,.mob-page-tab').forEach(n => n.classList.remove('active'));
   document.getElementById('page-'+name).classList.add('active');
   document.querySelectorAll('[data-page="'+name+'"]').forEach(n => n.classList.add('active'));
   curPage = name;
