@@ -12,7 +12,7 @@
   --bg1:   #111116;
   --bg2:   #18181f;
   --bg3:   #1f1f28;
-  --bg4:   #27273300;
+  --bg4:   #2a2a35;
   --bdr:   rgba(255,255,255,0.07);
   --bdr2:  rgba(255,255,255,0.12);
   --txt:   #f0f0f4;
@@ -27,6 +27,24 @@
   --r:     12px;
   --rl:    16px;
 }
+/* ─── LIGHT MODE ─── */
+body.light {
+  --bg:    #f5f5f7;
+  --bg1:   #ffffff;
+  --bg2:   #f0f0f4;
+  --bg3:   #e8e8ee;
+  --bg4:   #dddde8;
+  --bdr:   rgba(0,0,0,0.08);
+  --bdr2:  rgba(0,0,0,0.14);
+  --txt:   #111118;
+  --txt2:  #55556a;
+  --txt3:  #9999aa;
+}
+/* smooth theme transition */
+*, *::before, *::after { transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+/* but keep animations fast */
+.spin, .sync-dot, .pages-slider { transition: none !important; }
+.pages-slider { transition: transform 0.32s cubic-bezier(0.4,0,0.2,1) !important; }
 html,body { height:100%; background:var(--bg); color:var(--txt); font-family:'Poppins',sans-serif; overflow:hidden; margin:0; }
 button,select,input { font-family:inherit; }
 ::-webkit-scrollbar { width:3px; }
@@ -397,6 +415,45 @@ button,select,input { font-family:inherit; }
   .habits-grid { grid-template-columns:1fr; }
   .cats-grid { grid-template-columns:repeat(2,1fr); }
 }
+
+/* ─── SETTINGS PAGE ─── */
+.settings-wrap { max-width:560px; margin:0 auto; display:flex; flex-direction:column; gap:22px; }
+.sett-section-title { font-size:11px; font-weight:700; color:var(--txt3); text-transform:uppercase; letter-spacing:1.2px; margin-bottom:8px; padding:0 4px; }
+.sett-card { background:var(--bg1); border:1px solid var(--bdr); border-radius:var(--rl); overflow:hidden; }
+.sett-divider { height:1px; background:var(--bdr); margin:0; }
+.sett-row { display:flex; align-items:center; gap:14px; padding:15px 16px; }
+.sett-row-btn { cursor:pointer; transition:background 0.15s; }
+.sett-row-btn:hover { background:var(--bg2); }
+.sett-row-icon { font-size:20px; width:28px; text-align:center; flex-shrink:0; }
+.sett-row-body { flex:1; min-width:0; }
+.sett-row-label { font-size:14px; font-weight:600; color:var(--txt); }
+.sett-row-sub { font-size:12px; color:var(--txt3); margin-top:2px; }
+.sett-row-chevron { font-size:18px; color:var(--txt3); font-weight:300; flex-shrink:0; }
+
+/* Theme picker */
+.theme-picker { display:flex; gap:12px; padding:6px 16px 16px; }
+.theme-opt {
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:8px;
+  cursor:pointer; padding:10px 8px; border-radius:12px;
+  border:2px solid var(--bdr); transition:all 0.18s;
+}
+.theme-opt:hover { border-color:var(--bdr2); }
+.theme-opt.active { border-color:var(--acc); background:var(--acc2); }
+.theme-preview {
+  width:100%; height:52px; border-radius:8px; overflow:hidden;
+  position:relative; border:1px solid var(--bdr);
+}
+.dark-preview { background:linear-gradient(135deg,#0a0a0d 0%,#18181f 50%,#1f1f28 100%); }
+.light-preview { background:linear-gradient(135deg,#f5f5f7 0%,#ffffff 50%,#f0f0f4 100%); }
+.dark-preview::after, .light-preview::after {
+  content:''; position:absolute; bottom:6px; left:6px; right:6px;
+  height:6px; border-radius:3px;
+}
+.dark-preview::after { background:rgba(232,58,106,0.6); }
+.light-preview::after { background:rgba(232,58,106,0.5); }
+.theme-opt-label { font-size:12px; font-weight:600; color:var(--txt2); }
+.theme-opt.active .theme-opt-label { color:var(--acc); }
+
 </style>
 </head>
 <body>
@@ -440,6 +497,7 @@ button,select,input { font-family:inherit; }
       <div class="nav-item active" data-page="today"><span class="nav-icon">☀️</span>Today<span class="nav-badge" id="sNavBadge">0</span></div>
       <div class="nav-item" data-page="habits"><span class="nav-icon">◎</span>Habits</div>
       <div class="nav-item" data-page="tasks"><span class="nav-icon">✓</span>Tasks</div>
+      <div class="nav-item" data-page="settings"><span class="nav-icon">⚙️</span>Settings</div>
     </nav>
     <div class="sidebar-foot">
       <div class="streak-box">
@@ -465,6 +523,7 @@ button,select,input { font-family:inherit; }
         <div class="tb-tab active" data-page="today">Today</div>
         <div class="tb-tab" data-page="habits">Habits</div>
         <div class="tb-tab" data-page="tasks">Tasks</div>
+        <div class="tb-tab" data-page="settings">Settings</div>
       </div>
     </div>
 
@@ -527,6 +586,73 @@ button,select,input { font-family:inherit; }
 
       <!-- CATEGORIES -->
       
+      <!-- SETTINGS -->
+      <div class="page" id="page-settings">
+        <div class="settings-wrap">
+
+          <!-- Account -->
+          <div class="sett-section">
+            <div class="sett-section-title">Account</div>
+            <div class="sett-card">
+              <div class="sett-row" id="settUserRow">
+                <div class="sett-row-icon">👤</div>
+                <div class="sett-row-body">
+                  <div class="sett-row-label" id="settUserName">Not signed in</div>
+                  <div class="sett-row-sub" id="settUserEmail"></div>
+                </div>
+              </div>
+              <div class="sett-divider"></div>
+              <div class="sett-row sett-row-btn" id="settAuthBtn" onclick="handleSettingsAuth()">
+                <div class="sett-row-icon" id="settAuthIcon">🔐</div>
+                <div class="sett-row-body">
+                  <div class="sett-row-label" id="settAuthLabel">Sign in with Google</div>
+                </div>
+                <div class="sett-row-chevron">›</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Appearance -->
+          <div class="sett-section">
+            <div class="sett-section-title">Appearance</div>
+            <div class="sett-card">
+              <div class="sett-row">
+                <div class="sett-row-icon">🎨</div>
+                <div class="sett-row-body">
+                  <div class="sett-row-label">Theme</div>
+                  <div class="sett-row-sub">Choose your preferred look</div>
+                </div>
+              </div>
+              <div class="theme-picker">
+                <div class="theme-opt active" id="themeOptDark" onclick="setTheme('dark')">
+                  <div class="theme-preview dark-preview"></div>
+                  <div class="theme-opt-label">Dark</div>
+                </div>
+                <div class="theme-opt" id="themeOptLight" onclick="setTheme('light')">
+                  <div class="theme-preview light-preview"></div>
+                  <div class="theme-opt-label">Light</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- App info -->
+          <div class="sett-section">
+            <div class="sett-section-title">App</div>
+            <div class="sett-card">
+              <div class="sett-row">
+                <div class="sett-row-icon">◈</div>
+                <div class="sett-row-body">
+                  <div class="sett-row-label">Momentum</div>
+                  <div class="sett-row-sub">Habit tracker · v1.0</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
 </div><!-- /pages-slider -->
     </div><!-- /pages -->
 
@@ -717,6 +843,9 @@ window.signOut = async function() {
   await fbSignOut(auth);
 };
 
+// Apply saved theme immediately on load
+(function() { const t = localStorage.getItem('mm_theme') || 'dark'; document.body.classList.toggle('light', t === 'light'); })();
+
 onAuthStateChanged(auth, user => {
   if (user) {
     currentUser = user;
@@ -735,7 +864,54 @@ onAuthStateChanged(auth, user => {
 });
 
 // ─── PAGE ORDER (matches tab order) ───
-const PAGE_ORDER = ['today','habits','tasks'];
+const PAGE_ORDER = ['today','habits','tasks','settings'];
+
+// ─── THEME ───
+function setTheme(mode) {
+  document.body.classList.toggle('light', mode === 'light');
+  localStorage.setItem('mm_theme', mode);
+  document.getElementById('themeOptDark').classList.toggle('active', mode === 'dark');
+  document.getElementById('themeOptLight').classList.toggle('active', mode === 'light');
+}
+function loadTheme() {
+  const saved = localStorage.getItem('mm_theme') || 'dark';
+  setTheme(saved);
+}
+
+// ─── SETTINGS PAGE ───
+function renderSettings() {
+  const nameEl = document.getElementById('settUserName');
+  const emailEl = document.getElementById('settUserEmail');
+  const authLabel = document.getElementById('settAuthLabel');
+  const authIcon = document.getElementById('settAuthIcon');
+  if (currentUser) {
+    if (nameEl) nameEl.textContent = currentUser.displayName || 'Signed in';
+    if (emailEl) emailEl.textContent = currentUser.email || '';
+    if (authLabel) authLabel.textContent = 'Sign Out';
+    if (authIcon) authIcon.textContent = '🚪';
+  } else {
+    if (nameEl) nameEl.textContent = 'Not signed in';
+    if (emailEl) emailEl.textContent = '';
+    if (authLabel) authLabel.textContent = 'Sign in with Google';
+    if (authIcon) authIcon.textContent = '🔐';
+  }
+  // sync theme buttons
+  const saved = localStorage.getItem('mm_theme') || 'dark';
+  const darkBtn = document.getElementById('themeOptDark');
+  const lightBtn = document.getElementById('themeOptLight');
+  if (darkBtn) darkBtn.classList.toggle('active', saved === 'dark');
+  if (lightBtn) lightBtn.classList.toggle('active', saved === 'light');
+}
+
+window.handleSettingsAuth = async function() {
+  if (currentUser) {
+    window.signOut();
+  } else {
+    window.signInWithGoogle();
+  }
+};
+
+window.setTheme = setTheme;
 
 // ─── INIT APP ───
 function initApp() {
@@ -747,7 +923,7 @@ function initApp() {
   const tbDate = document.getElementById('tbDate');
   if (tbDate) tbDate.textContent = dateStr;
 
-  // Init swipe
+  loadTheme();
   initSwipe();
   renderToday();
   updateSidebar();
@@ -811,6 +987,7 @@ window.goPage = function(name) {
   if (name==='today') renderToday();
   if (name==='habits') renderHabits();
   if (name==='tasks') renderTasks();
+  if (name==='settings') renderSettings();
 };
 
 // ─── TODAY ───
