@@ -376,19 +376,19 @@ button,select,input { font-family:inherit; }
 @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 
 /* ─── PAGES SLIDER (swipeable) ─── */
-.pages { flex:1; overflow:hidden; min-height:0; }
+.pages { flex:1; overflow:hidden; min-height:0; position:relative; }
 .pages-slider {
   display:flex; width:100%; height:100%;
   transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
   will-change:transform;
   transform:translateX(0);
+  align-items:flex-start;
 }
 .page {
   min-width:100%; width:100%;
-  min-height:100%; height:100%;
+  height:100%;
   overflow-y:auto; overflow-x:hidden;
-  padding:18px;
-  padding-bottom:calc(18px + env(safe-area-inset-bottom));
+  padding:18px 18px calc(40px + env(safe-area-inset-bottom)) 18px;
   -webkit-overflow-scrolling:touch;
   flex-shrink:0; flex-grow:0;
   box-sizing:border-box;
@@ -405,7 +405,7 @@ button,select,input { font-family:inherit; }
   .today-layout { grid-template-columns:1fr; }
   .side-panel { display:none; }
   .kpi-row { grid-template-columns:repeat(2,1fr); }
-  .page { padding:12px; }
+  .page { padding:12px 12px calc(40px + env(safe-area-inset-bottom)) 12px; }
   .toast-wrap { bottom:16px; }
   .modal-overlay { align-items:flex-end; }
 }
@@ -454,6 +454,60 @@ button,select,input { font-family:inherit; }
 .theme-opt-label { font-size:12px; font-weight:600; color:var(--txt2); }
 .theme-opt.active .theme-opt-label { color:var(--acc); }
 
+
+/* ─── STATISTICS PAGE ─── */
+.stats-wrap { display:flex; flex-direction:column; gap:20px; max-width:700px; margin:0 auto; }
+.stats-section-title { font-size:11px; font-weight:700; color:var(--txt3); text-transform:uppercase; letter-spacing:1.2px; margin-bottom:10px; }
+.stats-card { background:var(--bg1); border:1px solid var(--bdr); border-radius:var(--rl); padding:18px; }
+.stats-card-title { font-size:13px; font-weight:700; color:var(--txt); margin-bottom:4px; }
+.stats-card-sub { font-size:11px; color:var(--txt3); margin-bottom:16px; }
+
+/* Summary row */
+.stats-summary { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:20px; }
+.stat-pill { background:var(--bg1); border:1px solid var(--bdr); border-radius:var(--r); padding:14px 12px; text-align:center; }
+.stat-pill-val { font-size:26px; font-weight:800; line-height:1; }
+.stat-pill-lbl { font-size:10px; color:var(--txt3); margin-top:4px; text-transform:uppercase; letter-spacing:0.8px; }
+
+/* Bar chart */
+.bar-chart { display:flex; align-items:flex-end; gap:6px; height:120px; }
+.bar-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; height:100%; }
+.bar-col-track { flex:1; width:100%; display:flex; align-items:flex-end; }
+.bar-fill {
+  width:100%; border-radius:5px 5px 0 0;
+  min-height:3px; transition:height 0.6s cubic-bezier(0.34,1.56,0.64,1);
+}
+.bar-lbl { font-size:9px; font-weight:600; color:var(--txt3); text-align:center; white-space:nowrap; }
+.bar-val { font-size:10px; font-weight:700; color:var(--txt2); }
+
+/* Streak chart */
+.streak-row { display:flex; gap:3px; flex-wrap:wrap; }
+.streak-cell {
+  width:14px; height:14px; border-radius:3px;
+  background:var(--bg3); transition:background 0.2s;
+}
+.streak-cell.s1 { background:rgba(232,58,106,0.25); }
+.streak-cell.s2 { background:rgba(232,58,106,0.5); }
+.streak-cell.s3 { background:rgba(232,58,106,0.75); }
+.streak-cell.s4 { background:var(--acc); }
+
+/* Habit breakdown */
+.habit-breakdown { display:flex; flex-direction:column; gap:10px; }
+.hb-row { display:flex; align-items:center; gap:10px; }
+.hb-emoji { font-size:18px; flex-shrink:0; }
+.hb-name { font-size:13px; font-weight:600; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.hb-track { flex:2; height:7px; background:var(--bg3); border-radius:4px; overflow:hidden; }
+.hb-fill { height:100%; border-radius:4px; transition:width 0.7s cubic-bezier(0.34,1.56,0.64,1); }
+.hb-pct { font-size:12px; font-weight:700; color:var(--txt2); min-width:36px; text-align:right; flex-shrink:0; }
+
+/* Tab switcher for stats */
+.stats-tabs { display:flex; gap:0; background:var(--bg2); border-radius:10px; padding:3px; margin-bottom:18px; }
+.stats-tab {
+  flex:1; text-align:center; padding:7px 4px; border-radius:8px;
+  font-size:12px; font-weight:600; color:var(--txt3);
+  cursor:pointer; transition:all 0.18s;
+}
+.stats-tab.active { background:var(--acc); color:#fff; box-shadow:0 2px 8px rgba(232,58,106,0.35); }
+
 </style>
 </head>
 <body>
@@ -496,7 +550,7 @@ button,select,input { font-family:inherit; }
       <div class="nav-lbl">Menu</div>
       <div class="nav-item active" data-page="today"><span class="nav-icon">☀️</span>Today<span class="nav-badge" id="sNavBadge">0</span></div>
       <div class="nav-item" data-page="habits"><span class="nav-icon">◎</span>Habits</div>
-      <div class="nav-item" data-page="tasks"><span class="nav-icon">✓</span>Tasks</div>
+      <div class="nav-item" data-page="stats"><span class="nav-icon">📊</span>Statistics</div>
       <div class="nav-item" data-page="settings"><span class="nav-icon">⚙️</span>Settings</div>
     </nav>
     <div class="sidebar-foot">
@@ -522,7 +576,7 @@ button,select,input { font-family:inherit; }
       <div class="topbar-tabs" id="topbarTabs">
         <div class="tb-tab active" data-page="today">Today</div>
         <div class="tb-tab" data-page="habits">Habits</div>
-        <div class="tb-tab" data-page="tasks">Tasks</div>
+        <div class="tb-tab" data-page="stats">Statistics</div>
         <div class="tb-tab" data-page="settings">Settings</div>
       </div>
     </div>
@@ -532,7 +586,6 @@ button,select,input { font-family:inherit; }
 
       <!-- TODAY -->
       <div class="page active" id="page-today">
-        <div class="kpi-row" id="kpiRow"></div>
         <div class="today-layout">
           <div>
             <div class="sec-lbl">Habits — Last 7 Days</div>
@@ -563,29 +616,15 @@ button,select,input { font-family:inherit; }
       <div class="page" id="page-habits">
         <div class="habits-grid" id="habitsGrid"></div>
       </div>
-
-      <!-- TASKS -->
-      <div class="page" id="page-tasks">
-        <div class="task-top">
-          <input class="task-inp" id="taskInp" placeholder="Add a new task…" onkeydown="if(event.key==='Enter')addTask()">
-          <select class="task-sel" id="taskPri">
-            <option value="high">🔴 High</option>
-            <option value="medium" selected>🟡 Med</option>
-            <option value="low">🟢 Low</option>
-          </select>
-          <button class="tb-btn primary" onclick="addTask()" style="height:40px;padding:0 12px;flex-shrink:0">Add</button>
-        </div>
-        <div class="task-section-label">Active</div>
-        <div class="task-list" id="tasksActive"></div>
-        <div class="task-section-label">Completed</div>
-        <div class="task-list" id="tasksDone"></div>
+      <!-- STATISTICS -->
+      <div class="page" id="page-stats">
+        <div id="statsContent"></div>
       </div>
 
-      <!-- TASKS -->
-      
 
-      <!-- CATEGORIES -->
-      
+
+
+
       <!-- SETTINGS -->
       <div class="page" id="page-settings">
         <div class="settings-wrap">
@@ -864,7 +903,7 @@ onAuthStateChanged(auth, user => {
 });
 
 // ─── PAGE ORDER (matches tab order) ───
-const PAGE_ORDER = ['today','habits','tasks','settings'];
+const PAGE_ORDER = ['today','habits','stats','settings'];
 
 // ─── THEME ───
 function setTheme(mode) {
@@ -987,11 +1026,12 @@ window.goPage = function(name) {
   if (name==='today') renderToday();
   if (name==='habits') renderHabits();
   if (name==='tasks') renderTasks();
+  if (name==='stats') renderStats();
   if (name==='settings') renderSettings();
 };
 
 // ─── TODAY ───
-function renderToday() { renderKPI(); renderDateColGrid(); renderRing(); renderMiniCal(); updateSidebar(); }
+function renderToday() { renderDateColGrid(); renderRing(); renderMiniCal(); updateSidebar(); }
 
 function renderKPI() {
   const done = H.filter(h => C[TODAY]?.[h.id]).length;
@@ -1415,6 +1455,151 @@ function weekRate() {
   for(let i=0;i<7;i++){const d=new Date(NOW);d.setDate(NOW.getDate()-i);H.forEach(h=>{tot++;if(C[ds(d)]?.[h.id])done++;});}
   return tot?Math.round(done/tot*100):0;
 }
+// ─── STATISTICS PAGE ───
+let statsPeriod = 'weekly'; // daily | weekly | monthly
+window.setStatsPeriod = function(p) {
+  statsPeriod = p;
+  document.querySelectorAll('.stats-tab').forEach(t => t.classList.toggle('active', t.dataset.period === p));
+  renderStatsCharts();
+};
+
+function renderStats() {
+  const el = document.getElementById('statsContent');
+  if (!el) return;
+
+  // Summary totals
+  const totalDone = Object.values(C).reduce((s,d) => typeof d==='object' ? s + Object.values(d).filter(Boolean).length : s, 0);
+  const bestStr = Math.max(0, ...H.map(h => bestStreak(h.id)));
+  const avg7 = H.length ? Math.round(H.reduce((s,h) => s + rate(h.id,7), 0) / H.length) : 0;
+
+  el.innerHTML = `
+    <div class="stats-wrap">
+      <div class="stats-summary">
+        <div class="stat-pill">
+          <div class="stat-pill-val" style="color:var(--acc)">${totalDone}</div>
+          <div class="stat-pill-lbl">Total Done</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-val" style="color:var(--amb)">🔥${bestStr}</div>
+          <div class="stat-pill-lbl">Best Streak</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-val" style="color:var(--grn)">${avg7}%</div>
+          <div class="stat-pill-lbl">7-day Avg</div>
+        </div>
+      </div>
+
+      <div class="stats-card">
+        <div class="stats-card-title">Completion Rate</div>
+        <div class="stats-card-sub">Percentage of habits completed per period</div>
+        <div class="stats-tabs" id="statsTabs">
+          <div class="stats-tab active" data-period="daily" onclick="setStatsPeriod('daily')">Daily</div>
+          <div class="stats-tab" data-period="weekly" onclick="setStatsPeriod('weekly')">Weekly</div>
+          <div class="stats-tab" data-period="monthly" onclick="setStatsPeriod('monthly')">Monthly</div>
+        </div>
+        <div id="statsBarChart" class="bar-chart"></div>
+      </div>
+
+      <div class="stats-card">
+        <div class="stats-card-title">Last 12 Weeks</div>
+        <div class="stats-card-sub">Activity heatmap — darker = more habits done</div>
+        <div class="streak-row" id="statsHeatmap"></div>
+      </div>
+
+      <div class="stats-card">
+        <div class="stats-card-title">Per Habit — 30 Day Rate</div>
+        <div class="stats-card-sub">How consistently each habit was completed</div>
+        <div class="habit-breakdown" id="statsHabits"></div>
+      </div>
+    </div>`;
+
+  renderStatsCharts();
+}
+
+function renderStatsCharts() {
+  // sync tab active state
+  document.querySelectorAll('.stats-tab').forEach(t => t.classList.toggle('active', t.dataset.period === statsPeriod));
+
+  // ── BAR CHART ──
+  const barEl = document.getElementById('statsBarChart');
+  if (!barEl) return;
+  let bars = [];
+  if (statsPeriod === 'daily') {
+    for (let i = 13; i >= 0; i--) {
+      const d = new Date(NOW); d.setDate(NOW.getDate() - i);
+      const dateStr = ds(d);
+      const done = H.filter(h => C[dateStr]?.[h.id]).length;
+      const pct = H.length ? Math.round(done / H.length * 100) : 0;
+      const lbl = d.toLocaleDateString('en-US',{weekday:'short'}).slice(0,2);
+      bars.push({lbl, pct, isToday: i===0});
+    }
+  } else if (statsPeriod === 'weekly') {
+    for (let w = 11; w >= 0; w--) {
+      let done = 0, total = 0;
+      for (let d = 0; d < 7; d++) {
+        const dd = new Date(NOW); dd.setDate(NOW.getDate() - w*7 - d);
+        if (dd > NOW) continue;
+        done += H.filter(h => C[ds(dd)]?.[h.id]).length;
+        total += H.length;
+      }
+      const pct = total ? Math.round(done/total*100) : 0;
+      bars.push({lbl: 'W'+(12-w), pct, isToday: w===0});
+    }
+  } else {
+    for (let m = 11; m >= 0; m--) {
+      const d = new Date(NOW.getFullYear(), NOW.getMonth() - m, 1);
+      const dim = new Date(d.getFullYear(), d.getMonth()+1, 0).getDate();
+      let done = 0, total = 0;
+      for (let day = 1; day <= dim; day++) {
+        const dd = new Date(d.getFullYear(), d.getMonth(), day);
+        if (dd > NOW) continue;
+        done += H.filter(h => C[ds(dd)]?.[h.id]).length;
+        total += H.length;
+      }
+      const pct = total ? Math.round(done/total*100) : 0;
+      const lbl = d.toLocaleDateString('en-US',{month:'short'});
+      bars.push({lbl, pct, isToday: m===0});
+    }
+  }
+
+  barEl.innerHTML = bars.map(b => `
+    <div class="bar-col">
+      <div class="bar-col-track">
+        <div class="bar-fill" style="height:${b.pct}%;background:${b.isToday ? 'var(--acc)' : 'var(--vlt)'}80;${b.isToday?'background:var(--acc);':''}"></div>
+      </div>
+      <div class="bar-lbl">${b.lbl}</div>
+    </div>`).join('');
+
+  // ── HEATMAP ──
+  const hmEl = document.getElementById('statsHeatmap');
+  if (hmEl) {
+    let cells = '';
+    for (let i = 83; i >= 0; i--) {
+      const d = new Date(NOW); d.setDate(NOW.getDate() - i);
+      const done = H.filter(h => C[ds(d)]?.[h.id]).length;
+      const total = H.length;
+      const lvl = total === 0 ? 0 : done === 0 ? 0 : done <= total*0.25 ? 1 : done <= total*0.5 ? 2 : done <= total*0.75 ? 3 : 4;
+      cells += `<div class="streak-cell s${lvl}" title="${ds(d)}: ${done}/${total}"></div>`;
+    }
+    hmEl.innerHTML = cells;
+  }
+
+  // ── PER HABIT BREAKDOWN ──
+  const hbEl = document.getElementById('statsHabits');
+  if (hbEl) {
+    if (!H.length) { hbEl.innerHTML = '<div style="color:var(--txt3);font-size:13px">No habits yet</div>'; return; }
+    hbEl.innerHTML = H.map(h => {
+      const r = rate(h.id, 30);
+      return `<div class="hb-row">
+        <div class="hb-emoji">${h.emoji}</div>
+        <div class="hb-name">${h.name}</div>
+        <div class="hb-track"><div class="hb-fill" style="width:${r}%;background:${h.color}"></div></div>
+        <div class="hb-pct" style="color:${h.color}">${r}%</div>
+      </div>`;
+    }).join('');
+  }
+}
+
 function updateSidebar() {
   const best=Math.max(0,...H.map(h=>streak(h.id)));
   document.getElementById('sStreak').textContent=best;
