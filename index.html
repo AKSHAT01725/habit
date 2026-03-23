@@ -353,18 +353,7 @@ button,select,input { font-family:inherit; }
   transition:transform 0.15s; line-height:1;
 }
 .mob-add-btn:active { transform:scale(0.9); }
-.mob-page-tabs {
-  display:flex; overflow-x:auto; padding:0 14px 0;
-  scrollbar-width:none; -ms-overflow-style:none; gap:0;
-}
-.mob-page-tabs::-webkit-scrollbar { display:none; }
-.mob-page-tab {
-  flex-shrink:0; padding:8px 14px 10px;
-  font-size:13px; font-weight:600; color:var(--txt3);
-  cursor:pointer; border-bottom:2px solid transparent;
-  transition:all 0.15s; white-space:nowrap;
-}
-.mob-page-tab.active { color:var(--acc); border-bottom-color:var(--acc); }
+
 
 /* ─── MOBILE BOTTOM NAV ─── */
 .mob-nav { display:none; }
@@ -485,13 +474,7 @@ button,select,input { font-family:inherit; }
         </div>
         <button class="mob-add-btn" onclick="openModal()">＋</button>
       </div>
-      <div class="mob-page-tabs" id="mobPageTabs">
-        <div class="mob-page-tab active" data-page="today">Today</div>
-        <div class="mob-page-tab" data-page="tasks">Tasks</div>
-        <div class="mob-page-tab" data-page="habits">Habits</div>
-        <div class="mob-page-tab" data-page="timer">Focus Timer</div>
-        <div class="mob-page-tab" data-page="categories">Categories</div>
-      </div>
+
     </div>
 
     <div class="pages">
@@ -588,6 +571,7 @@ button,select,input { font-family:inherit; }
       <div class="mob-tab" data-page="habits"><span class="mob-tab-icon">◎</span>Habits</div>
       <div class="mob-tab" data-page="tasks"><span class="mob-tab-icon">✓</span>Tasks</div>
       <div class="mob-tab" data-page="timer"><span class="mob-tab-icon">⏱</span>Timer</div>
+      <div class="mob-tab" data-page="categories"><span class="mob-tab-icon">⊞</span>More</div>
     </div>
   </div>
 </div>
@@ -794,7 +778,7 @@ onAuthStateChanged(auth, user => {
 
 // ─── INIT APP ───
 function initApp() {
-  document.querySelectorAll('.nav-item,.mob-tab,.mob-page-tab').forEach(el => {
+  document.querySelectorAll('.nav-item,.mob-tab').forEach(el => {
     el.addEventListener('click', () => { const pg = el.dataset.page; if (pg) goPage(pg); });
   });
   const dateStr = NOW.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
@@ -808,7 +792,7 @@ function initApp() {
 // ─── NAVIGATION ───
 window.goPage = function(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item,.mob-tab,.mob-page-tab').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.nav-item,.mob-tab').forEach(n => n.classList.remove('active'));
   document.getElementById('page-'+name).classList.add('active');
   document.querySelectorAll('[data-page="'+name+'"]').forEach(n => n.classList.add('active'));
   curPage = name;
